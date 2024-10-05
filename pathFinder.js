@@ -59,5 +59,5 @@ const reconstructPath = (previous, curr) => {
   return path.reverse(); // Reverse the path to get start to finish
 };
 
-const isValidCell = (x, y) =>
+const isValidCell = (matrix, x, y) =>
   x >= 0 && x <= matrix.length - 1 && y >= 0 && y <= matrix.length - 1;
