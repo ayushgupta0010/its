@@ -1,9 +1,4 @@
-import Car from "./Car.js";
-import { getMatrix } from "./matrix.js";
-import { generateMatrix } from "./matrixGenerator.js";
 import Queue from "./queue.js";
-
-const matrix = generateMatrix(5);
 
 class Cell {
   constructor(x, y) {
@@ -12,7 +7,7 @@ class Cell {
   }
 }
 
-const getPath = (car) => {
+export const getPath = (matrix, car) => {
   const finish = matrix.length - 1;
 
   const queue = new Queue();
@@ -53,70 +48,6 @@ const getPath = (car) => {
       }
     }
   }
-  // while (!queue.isEmpty()) {
-  //   let isDeadEnd = true;
-
-  //   const curr = queue.peek();
-
-  //   console.log(visited);
-
-  //   if (curr.x == finish && curr.y == finish) {
-  //     console.log(queue.path());
-  //     return;
-  //   }
-
-  //   // console.log(queue.path());
-  //   // console.log(matrix);
-
-  //   // move north
-  //   if (
-  //     isValidCell(curr.x - 1, curr.y) &&
-  //     !visited[curr.x - 1][curr.y] &&
-  //     matrix[curr.x - 1][curr.y] === 1
-  //   ) {
-  //     queue.enqueue(new Cell(curr.x - 1, curr.y));
-  //     visited[curr.x - 1][curr.y] = true;
-  //     isDeadEnd = false;
-  //   }
-
-  //   // move south
-  //   if (
-  //     isValidCell(curr.x + 1, curr.y) &&
-  //     !visited[curr.x + 1][curr.y] &&
-  //     matrix[curr.x + 1][curr.y] === 1
-  //   ) {
-  //     queue.enqueue(new Cell(curr.x + 1, curr.y));
-  //     visited[curr.x + 1][curr.y] = true;
-  //     isDeadEnd = false;
-  //   }
-
-  //   // move east
-  //   if (
-  //     isValidCell(curr.x, curr.y + 1) &&
-  //     !visited[curr.x][curr.y + 1] &&
-  //     matrix[curr.x][curr.y + 1] === 1
-  //   ) {
-  //     queue.enqueue(new Cell(curr.x, curr.y + 1));
-  //     visited[curr.x][curr.y + 1] = true;
-  //     isDeadEnd = false;
-  //   }
-
-  //   // move west
-  //   if (
-  //     isValidCell(curr.x, curr.y - 1) &&
-  //     !visited[curr.x][curr.y - 1] &&
-  //     matrix[curr.x][curr.y - 1] === 1
-  //   ) {
-  //     queue.enqueue(new Cell(curr.x, curr.y - 1));
-  //     visited[curr.x][curr.y - 1] = true;
-  //     isDeadEnd = false;
-  //   }
-
-  //   if (isDeadEnd) {
-  //     matrix[curr.x][curr.y] = 2;
-  //     queue.dequeue();
-  //   }
-  // }
 };
 
 const reconstructPath = (previous, curr) => {
@@ -130,5 +61,3 @@ const reconstructPath = (previous, curr) => {
 
 const isValidCell = (x, y) =>
   x >= 0 && x <= matrix.length - 1 && y >= 0 && y <= matrix.length - 1;
-
-getPath(new Car(0, 0));
