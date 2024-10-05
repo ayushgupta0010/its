@@ -25,8 +25,7 @@ export const getPath = (matrix, car) => {
     const curr = queue.dequeue();
 
     if (curr.x === finish && curr.y === finish) {
-      console.log(reconstructPath(previous, curr)); // Reconstruct and log the path
-      return;
+      return reconstructPath(previous, curr);
     }
 
     const neighbors = [
