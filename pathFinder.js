@@ -1,4 +1,3 @@
-import { generateMatrix } from "./matrixGenerator.js";
 import Queue from "./queue.js";
 
 class Cell {
@@ -19,8 +18,8 @@ export const getPath = (matrix, car) => {
     new Array(matrix.length).fill(null),
   );
 
-  visited[car.x][car.y] = true;
-  queue.enqueue(new Cell(car.x, car.y));
+  visited[Math.floor(car.x)][Math.floor(car.y)] = true;
+  queue.enqueue(new Cell(Math.floor(car.x), Math.floor(car.y)));
 
   while (!queue.isEmpty()) {
     const curr = queue.dequeue();
@@ -61,5 +60,3 @@ const reconstructPath = (previous, curr) => {
 
 const isValidCell = (matrix, x, y) =>
   x >= 0 && x <= matrix.length - 1 && y >= 0 && y <= matrix.length - 1;
-
-console.log(getPath(generateMatrix(50), new Cell(0, 0)));
