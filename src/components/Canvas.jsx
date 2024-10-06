@@ -26,8 +26,8 @@ const Canvas = (props) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
-  const randint = () => {
-    return (Math.random() % 3) + 1;
+  const randint = (min=2, max=4) => {
+    return Math.floor((Math.random() * (max - min)) + min)
   };
 
   const drawBackground = (ctx) => {
@@ -57,7 +57,7 @@ const Canvas = (props) => {
   const runCars = (ctx, cars) => {
     setInterval(function () {
       moveAllCars(ctx, cars);
-    }, 250);
+    }, 1000);
   };
 
   const moveAllCars = (ctx, cars) => {
@@ -85,6 +85,33 @@ const Canvas = (props) => {
     drawCar(ctx, car, roadColor);
     // move here!
     if (car.pathIndex < car.path.length) {
+      for (let otherCar of cars) {
+        if (otherCar != car) {
+          if(otherCar.path[otherCar.pathIndex] != undefined){
+            if (otherCar.path[otherCar.pathIndex][0] == car.path[car.pathIndex][0] && otherCar.path[otherCar.pathIndex][1] == car.path[car.pathIndex][1]) {
+            console.log("Collision Detected!!")
+            let carToSlowDown;
+            let newCoords;
+            if (otherCar.path.length >= car.path.length) {
+              carToSlowDown = car;
+            } else {
+              carToSlowDown = otherCar;
+            }
+
+            console.log(carToSlowDown.path[carToSlowDown.pathIndex])
+
+            newCoords = carToSlowDown.path[carToSlowDown.pathIndex - 1];
+            carToSlowDown.x = newCoords[0];
+            carToSlowDown.y = newCoords[1];
+
+            carToSlowDown.pathIndex -= 1
+
+            console.log(carToSlowDown.path[carToSlowDown.pathIndex])
+          }
+          }
+          
+        }
+      }
       const currIndex = car.pathIndex;
       car.x = car.path[car.pathIndex][0];
       car.y = car.path[car.pathIndex][1];
@@ -147,14 +174,14 @@ const Canvas = (props) => {
     let cars = [];
     let car = new Car(0, 0, carWidth, carHeight, movementEnum.RIGHT, 2);
     cars.push(car);
-    let car2 = new Car(5, 37, carWidth, carHeight, movementEnum.LEFT, 2);
+    let car2 = new Car(5, 38, carWidth, carHeight, movementEnum.LEFT, 2);
     cars.push(car2);
-    let car3 = new Car(49, 0, carWidth, carHeight, movementEnum.UP, 3);
+    let car3 = new Car(49, 0, carWidth, carHeight, movementEnum.UP, 3); // 3
     cars.push(car3);
-    let car4 = new Car(0, 25, carWidth, carHeight, movementEnum.DOWN, 1);
+    let car4 = new Car(0, 25, carWidth, carHeight, movementEnum.DOWN, 1); // 1
     cars.push(car4);
-    let car5 = new Car(38, 5, carWidth, carHeight, movementEnum.UP, 2);
-    cars.push(car5);
+    let car5 = new Car(39, 5, carWidth, carHeight, movementEnum.UP, 2); // 2
+    cars.push(car5); // comments are default values to test a collsions
 
     drawBackground(context);
     createBoardFromMatrix(context);
