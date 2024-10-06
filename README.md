@@ -1,4 +1,4 @@
-**Intelligent Transportation System**
+**Ultra Intelligent Transportation System**
 
 We used **Node.js and React.js** to develop this project, which aims to reduce the time Philadelphia residents spend in traffic jams.
 The system employs V2X (vehicle-to-vehicle) communication technology, enabling vehicles to share information about their speed and obstacles on the road. 
