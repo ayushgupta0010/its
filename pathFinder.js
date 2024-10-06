@@ -1,3 +1,4 @@
+import { generateMatrix } from "./matrixGenerator.js";
 import Queue from "./queue.js";
 
 class Cell {
@@ -37,7 +38,7 @@ export const getPath = (matrix, car) => {
 
     for (const neighbor of neighbors) {
       if (
-        isValidCell(neighbor.x, neighbor.y) &&
+        isValidCell(matrix, neighbor.x, neighbor.y) &&
         !visited[neighbor.x][neighbor.y] &&
         matrix[neighbor.x][neighbor.y] === 1
       ) {
@@ -60,3 +61,5 @@ const reconstructPath = (previous, curr) => {
 
 const isValidCell = (matrix, x, y) =>
   x >= 0 && x <= matrix.length - 1 && y >= 0 && y <= matrix.length - 1;
+
+console.log(getPath(generateMatrix(50), new Cell(0, 0)));
